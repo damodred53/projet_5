@@ -33,52 +33,11 @@
    */
 
 
-  const getUID = prefix => {
-    do {
-      prefix += Math.floor(Math.random() * MAX_UID);
-    } while (document.getElementById(prefix));
+  
 
-    return prefix;
-  };
+  
 
-  const getSelector = element => {
-    let selector = element.getAttribute('data-bs-target');
-
-    if (!selector || selector === '#') {
-      let hrefAttr = element.getAttribute('href'); // The only valid content that could double as a selector are IDs or classes,
-      // so everything starting with `#` or `.`. If a "real" URL is used as the selector,
-      // `document.querySelector` will rightfully complain it is invalid.
-      // See https://github.com/twbs/bootstrap/issues/32273
-
-      if (!hrefAttr || !hrefAttr.includes('#') && !hrefAttr.startsWith('.')) {
-        return null;
-      } // Just in case some CMS puts out a full URL with the anchor appended
-
-
-      if (hrefAttr.includes('#') && !hrefAttr.startsWith('#')) {
-        hrefAttr = `#${hrefAttr.split('#')[1]}`;
-      }
-
-      selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : null;
-    }
-
-    return selector;
-  };
-
-  const getSelectorFromElement = element => {
-    const selector = getSelector(element);
-
-    if (selector) {
-      return document.querySelector(selector) ? selector : null;
-    }
-
-    return null;
-  };
-
-  const getElementFromSelector = element => {
-    const selector = getSelector(element);
-    return selector ? document.querySelector(selector) : null;
-  };
+  
 
   const getTransitionDurationFromElement = element => {
     if (!element) {
@@ -152,44 +111,7 @@
     return getComputedStyle(element).getPropertyValue('visibility') === 'visible';
   };
 
-  const isDisabled = element => {
-    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-      return true;
-    }
-
-    if (element.classList.contains('disabled')) {
-      return true;
-    }
-
-    if (typeof element.disabled !== 'undefined') {
-      return element.disabled;
-    }
-
-    return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false';
-  };
-
-  const findShadowRoot = element => {
-    if (!document.documentElement.attachShadow) {
-      return null;
-    } // Can find the shadow root otherwise it'll return the document
-
-
-    if (typeof element.getRootNode === 'function') {
-      const root = element.getRootNode();
-      return root instanceof ShadowRoot ? root : null;
-    }
-
-    if (element instanceof ShadowRoot) {
-      return element;
-    } // when we don't find a shadow root
-
-
-    if (!element.parentNode) {
-      return null;
-    }
-
-    return findShadowRoot(element.parentNode);
-  };
+  
 
   const noop = () => {};
   /**
@@ -647,18 +569,7 @@
       return null;
     },
 
-    remove(element, key) {
-      if (!elementMap.has(element)) {
-        return;
-      }
-
-      const instanceMap = elementMap.get(element);
-      instanceMap.delete(key); // free up element references if there are no instances left for an element
-
-      if (instanceMap.size === 0) {
-        elementMap.delete(element);
-      }
-    }
+    
 
   };
 
@@ -875,10 +786,7 @@
     } // Public
 
 
-    toggle() {
-      // Toggle class and sync the `aria-pressed` attribute with the return value of the `.toggle()` method
-      this._element.setAttribute('aria-pressed', this._element.classList.toggle(CLASS_NAME_ACTIVE$3));
-    } // Static
+    
 
 
     static jQueryInterface(config) {
@@ -899,12 +807,7 @@
    */
 
 
-  EventHandler.on(document, EVENT_CLICK_DATA_API$6, SELECTOR_DATA_TOGGLE$5, event => {
-    event.preventDefault();
-    const button = event.target.closest(SELECTOR_DATA_TOGGLE$5);
-    const data = Button.getOrCreateInstance(button);
-    data.toggle();
-  });
+  
   /**
    * ------------------------------------------------------------------------
    * jQuery
@@ -1252,22 +1155,7 @@
       return config;
     }
 
-    _handleSwipe() {
-      const absDeltax = Math.abs(this.touchDeltaX);
-
-      if (absDeltax <= SWIPE_THRESHOLD) {
-        return;
-      }
-
-      const direction = absDeltax / this.touchDeltaX;
-      this.touchDeltaX = 0;
-
-      if (!direction) {
-        return;
-      }
-
-      this._slide(direction > 0 ? DIRECTION_RIGHT : DIRECTION_LEFT);
-    }
+    
 
     _addEventListeners() {
       if (this._config.keyboard) {
@@ -1289,43 +1177,11 @@
         return this._pointerEvent && (event.pointerType === POINTER_TYPE_PEN || event.pointerType === POINTER_TYPE_TOUCH);
       };
 
-      const start = event => {
-        if (hasPointerPenTouch(event)) {
-          this.touchStartX = event.clientX;
-        } else if (!this._pointerEvent) {
-          this.touchStartX = event.touches[0].clientX;
-        }
-      };
+      
 
-      const move = event => {
-        // ensure swiping with one touch and not pinching
-        this.touchDeltaX = event.touches && event.touches.length > 1 ? 0 : event.touches[0].clientX - this.touchStartX;
-      };
+     
 
-      const end = event => {
-        if (hasPointerPenTouch(event)) {
-          this.touchDeltaX = event.clientX - this.touchStartX;
-        }
-
-        this._handleSwipe();
-
-        if (this._config.pause === 'hover') {
-          // If it's a touch-enabled device, mouseenter/leave are fired as
-          // part of the mouse compatibility events on first tap - the carousel
-          // would stop cycling until user tapped out of it;
-          // here, we listen for touchend, explicitly pause the carousel
-          // (as if it's the second time we tap on it, mouseenter compat event
-          // is NOT fired) and after a timeout (to allow for mouse compatibility
-          // events to fire) we explicitly restart cycling
-          this.pause();
-
-          if (this.touchTimeout) {
-            clearTimeout(this.touchTimeout);
-          }
-
-          this.touchTimeout = setTimeout(event => this.cycle(event), TOUCHEVENT_COMPAT_WAIT + this._config.interval);
-        }
-      };
+      
 
       SelectorEngine.find(SELECTOR_ITEM_IMG, this._element).forEach(itemImg => {
         EventHandler.on(itemImg, EVENT_DRAG_START, event => event.preventDefault());
@@ -1343,19 +1199,7 @@
       }
     }
 
-    _keydown(event) {
-      if (/input|textarea/i.test(event.target.tagName)) {
-        return;
-      }
-
-      const direction = KEY_TO_DIRECTION[event.key];
-
-      if (direction) {
-        event.preventDefault();
-
-        this._slide(direction);
-      }
-    }
+    
 
     _getItemIndex(element) {
       this._items = element && element.parentNode ? SelectorEngine.find(SELECTOR_ITEM, element.parentNode) : [];
@@ -1557,30 +1401,7 @@
       });
     }
 
-    static dataApiClickHandler(event) {
-      const target = getElementFromSelector(this);
-
-      if (!target || !target.classList.contains(CLASS_NAME_CAROUSEL)) {
-        return;
-      }
-
-      const config = { ...Manipulator.getDataAttributes(target),
-        ...Manipulator.getDataAttributes(this)
-      };
-      const slideIndex = this.getAttribute('data-bs-slide-to');
-
-      if (slideIndex) {
-        config.interval = false;
-      }
-
-      Carousel.carouselInterface(target, config);
-
-      if (slideIndex) {
-        Carousel.getInstance(target).to(slideIndex);
-      }
-
-      event.preventDefault();
-    }
+    
 
   }
   /**
@@ -1690,189 +1511,21 @@
 
     static get NAME() {
       return NAME$a;
-    } // Public
+    } // Public//
 
 
-    toggle() {
-      if (this._isShown()) {
-        this.hide();
-      } else {
-        this.show();
-      }
-    }
+    
 
-    show() {
-      if (this._isTransitioning || this._isShown()) {
-        return;
-      }
+    
 
-      let actives = [];
-      let activesData;
-
-      if (this._config.parent) {
-        const children = SelectorEngine.find(CLASS_NAME_DEEPER_CHILDREN, this._config.parent);
-        actives = SelectorEngine.find(SELECTOR_ACTIVES, this._config.parent).filter(elem => !children.includes(elem)); // remove children if greater depth
-      }
-
-      const container = SelectorEngine.findOne(this._selector);
-
-      if (actives.length) {
-        const tempActiveData = actives.find(elem => container !== elem);
-        activesData = tempActiveData ? Collapse.getInstance(tempActiveData) : null;
-
-        if (activesData && activesData._isTransitioning) {
-          return;
-        }
-      }
-
-      const startEvent = EventHandler.trigger(this._element, EVENT_SHOW$5);
-
-      if (startEvent.defaultPrevented) {
-        return;
-      }
-
-      actives.forEach(elemActive => {
-        if (container !== elemActive) {
-          Collapse.getOrCreateInstance(elemActive, {
-            toggle: false
-          }).hide();
-        }
-
-        if (!activesData) {
-          Data.set(elemActive, DATA_KEY$9, null);
-        }
-      });
-
-      const dimension = this._getDimension();
-
-      this._element.classList.remove(CLASS_NAME_COLLAPSE);
-
-      this._element.classList.add(CLASS_NAME_COLLAPSING);
-
-      this._element.style[dimension] = 0;
-
-      this._addAriaAndCollapsedClass(this._triggerArray, true);
-
-      this._isTransitioning = true;
-
-      const complete = () => {
-        this._isTransitioning = false;
-
-        this._element.classList.remove(CLASS_NAME_COLLAPSING);
-
-        this._element.classList.add(CLASS_NAME_COLLAPSE, CLASS_NAME_SHOW$7);
-
-        this._element.style[dimension] = '';
-        EventHandler.trigger(this._element, EVENT_SHOWN$5);
-      };
-
-      const capitalizedDimension = dimension[0].toUpperCase() + dimension.slice(1);
-      const scrollSize = `scroll${capitalizedDimension}`;
-
-      this._queueCallback(complete, this._element, true);
-
-      this._element.style[dimension] = `${this._element[scrollSize]}px`;
-    }
-
-    hide() {
-      if (this._isTransitioning || !this._isShown()) {
-        return;
-      }
-
-      const startEvent = EventHandler.trigger(this._element, EVENT_HIDE$5);
-
-      if (startEvent.defaultPrevented) {
-        return;
-      }
-
-      const dimension = this._getDimension();
-
-      this._element.style[dimension] = `${this._element.getBoundingClientRect()[dimension]}px`;
-      reflow(this._element);
-
-      this._element.classList.add(CLASS_NAME_COLLAPSING);
-
-      this._element.classList.remove(CLASS_NAME_COLLAPSE, CLASS_NAME_SHOW$7);
-
-      const triggerArrayLength = this._triggerArray.length;
-
-      for (let i = 0; i < triggerArrayLength; i++) {
-        const trigger = this._triggerArray[i];
-        const elem = getElementFromSelector(trigger);
-
-        if (elem && !this._isShown(elem)) {
-          this._addAriaAndCollapsedClass([trigger], false);
-        }
-      }
-
-      this._isTransitioning = true;
-
-      const complete = () => {
-        this._isTransitioning = false;
-
-        this._element.classList.remove(CLASS_NAME_COLLAPSING);
-
-        this._element.classList.add(CLASS_NAME_COLLAPSE);
-
-        EventHandler.trigger(this._element, EVENT_HIDDEN$5);
-      };
-
-      this._element.style[dimension] = '';
-
-      this._queueCallback(complete, this._element, true);
-    }
-
-    _isShown(element = this._element) {
-      return element.classList.contains(CLASS_NAME_SHOW$7);
-    } // Private
+    
 
 
-    _getConfig(config) {
-      config = { ...Default$9,
-        ...Manipulator.getDataAttributes(this._element),
-        ...config
-      };
-      config.toggle = Boolean(config.toggle); // Coerce string values
+   
 
-      config.parent = getElement(config.parent);
-      typeCheckConfig(NAME$a, config, DefaultType$9);
-      return config;
-    }
+    
 
-    _getDimension() {
-      return this._element.classList.contains(CLASS_NAME_HORIZONTAL) ? WIDTH : HEIGHT;
-    }
-
-    _initializeChildren() {
-      if (!this._config.parent) {
-        return;
-      }
-
-      const children = SelectorEngine.find(CLASS_NAME_DEEPER_CHILDREN, this._config.parent);
-      SelectorEngine.find(SELECTOR_DATA_TOGGLE$4, this._config.parent).filter(elem => !children.includes(elem)).forEach(element => {
-        const selected = getElementFromSelector(element);
-
-        if (selected) {
-          this._addAriaAndCollapsedClass([element], this._isShown(selected));
-        }
-      });
-    }
-
-    _addAriaAndCollapsedClass(triggerArray, isOpen) {
-      if (!triggerArray.length) {
-        return;
-      }
-
-      triggerArray.forEach(elem => {
-        if (isOpen) {
-          elem.classList.remove(CLASS_NAME_COLLAPSED);
-        } else {
-          elem.classList.add(CLASS_NAME_COLLAPSED);
-        }
-
-        elem.setAttribute('aria-expanded', isOpen);
-      });
-    } // Static
+    
 
 
     static jQueryInterface(config) {
