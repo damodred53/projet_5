@@ -2,9 +2,78 @@
 <html lang="fr">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<<link rel="stylesheet" href="./assets/bootstrap/bootstrap.css">
+	<link rel="stylesheet" href="./assets/bootstrap/bootstrap.css">
 	<link rel="stylesheet" href="./assets/style.css">
+
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "photographer's studio",
+			"image": [
+			https://nina-carducci.github.io/assets/images/nina.png
+			 ],
+			"name": "Nina Carducci's website",
+			"address": {
+			  "@type": "PostalAddress",
+			  "streetAddress": "68 avenue Alsace-Lorraine",
+			  "addressLocality": "Bordeaux",
+			  "addressRegion": "Nouvelle Aquitaine",
+			  "postalCode": "33200",
+			  "addressCountry": "FR"
+			},
+			"review": {
+			  "@type": "Review",
+			  "reviewRating": {
+				"@type": "Rating",
+				"ratingValue": "4",
+				"bestRating": "5"
+			  },
+			  "author": {
+				"@type": "Person",
+				"name": "Nina Carducci"
+			  }
+			},
+			"url": "https://nina-carducci.github.io/",
+			"telephone": "+33556677889",
+			"openingHoursSpecification": [
+			  {
+				"@type": "OpeningHoursSpecification",
+				"dayOfWeek": [
+				  "Monday",
+				  "Tuesday",
+				  "Wednesday",
+				  "Thursday",
+				  "Friday",
+				],
+				"opens": "10:00",
+				"closes": "19:00"
+			  },
+			],
+			"acceptsReservations": "False"
+		  }
+	  </script>
+
+	<meta name= "description"  content= "Bienvenue sur le site officiel de la photographe Nina Carducci. Nous vous proposons différents services : Session shooting, retouches de vos photos, album." >
 	
+	<!--meta données Schema.org-->
+	<meta itemprop="name" content="Nina Carducci" />
+	<meta itemprop="description" content="Bienvenue sur le site officiel de la photographe Nina Carducci. Nous vous proposons différents services : Session shooting, retouches de vos photos, album." />
+	<meta itemprop="image" content="https://nina-carducci.github.io/" />
+
+	<!-- Open Graph data -->
+	<meta property="og:title" content="Site officiel de la photographe Nina Carducci"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:url" content="https://nina-carducci.github.io/"/>
+	<meta property="og:image" content="./assets/images/nina-50.webp"/>
+	<meta property="og:description" content="Bienvenue sur le site officiel de la photographe Nina Carducci. Nous vous proposons différents services : Session shooting, retouches de vos photos, album."/>
+	
+		<!-- Twitter Card data -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Site officiel de la photographe Nina Carducci">
+	<meta name="twitter:description" content="Bienvenue sur le site officiel de la photographe Nina Carducci. Nous vous proposons différents services : Session shooting, retouches de vos photos, album.">
+	<meta name="twitter:image" content="./assets/images/nina-50.webp">
+
+
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter&family=Spectral:ital,wght@0,400;1,300;1,400;1,800&display=swap" rel="stylesheet">
@@ -15,7 +84,7 @@
 <body>
 <header class="top-header">
 	<h1 class="name">Nina Carducci</h1>
-	<div class="nav">   
+	<div class="nav">   s
 		<ul>
 			<li><a href="#about">À propos</a></li>
 			<li><a href="#gallery">Galerie</a></li>
@@ -23,7 +92,7 @@
 			<li><a href="#contact">Contact</a></li>
 			<li><a class="social-link" href="https://www.instagram.com/ninacarducci.photo/?hl=fr" target="_blank">
 
-				<img src="./assets/images/instagram.png" alt="Link to Instagram" loading="lazy"/></a>
+				<img src="./assets/images/instagram.png" alt="Link to Instagram"/></a>
 
 			</li>
 		</ul>
@@ -38,31 +107,32 @@
 		  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
 		</div>
 		<div class="carousel-inner">
-		  <div class="carousel-item active">
+			<div class="carousel-item active">
 
-			<img  
-			srcset="./assets/images/slider/ryoji-iwata-15.webp 365w,
-			./assets/images/slider/ryoji-iwata-25.webp 1135w,
-			./assets/images/slider/ryoji-iwata-50.webp 1513w,
-			./assets/images/slider/ryoji-iwata.webp 4540" alt="An asiatic man walking on the street" class="d-block w-100"  loading="lazy"> 
+				<img  
+				srcset="./assets/images/slider/ryoji-iwata-15.webp 365w,
+				./assets/images/slider/ryoji-iwata-25.webp 1135w,
+				./assets/images/slider/ryoji-iwata-50.webp 1513w,
+				./assets/images/slider/ryoji-iwata.webp 4540" alt="An asiatic man walking on the street" class="d-block w-100"  > 
 
-		  </div>
-		  <div class="carousel-item">
+			</div>
+			<div class="carousel-item">
 
-			<img
-			srcset="./assets/images/slider/nicholas-green-25.webp 667w,
-			./assets/images/slider/nicholas-green-50.webp 1000w,
-			./assets/images/slider/nicholas-green.webp 2000w" alt="Picture of a crowd in a concert" class="d-block w-100" loading="lazy">
+				<img
+				srcset="./assets/images/slider/nicholas-green-25.webp 667w,
+				./assets/images/slider/nicholas-green-50.webp 1000w,
+				./assets/images/slider/nicholas-green.webp 2000w" alt="Picture of a crowd in a concert" class="d-block w-100" loading="lazy">
 
-		  </div>
-		  <div class="carousel-item">
+			</div>
+			<div class="carousel-item">
 
-			<img 
-				srcset="./assets/images/slider/edward-cisneros-25.webp 628w,
-				./assets/images/slider/edward-cisneros-50.webp 942w,
-				./assets/images/slider/edward-cisneros.webp 1884w" alt="Picture in a wedding" class="d-block w-100" loading="lazy">
-				
-		  </div>
+				<img 
+					srcset="./assets/images/slider/edward-cisneros-25.webp 628w,
+					./assets/images/slider/edward-cisneros-50.webp 942w,
+					./assets/images/slider/edward-cisneros.webp 1884w" alt="Picture in a wedding" class="d-block w-100" loading="lazy">
+					
+			</div>
+
 		</div>
 		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
 		  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -220,7 +290,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous" defer></script>
 	<script src="./assets/maugallery.js" defer></script>
-<!--<script src="./assets/bootstrap/bootstrap.bundle.js" defer></script>-->
 	<script src="./assets/scripts.js" defer></script>
 	
 </body>
