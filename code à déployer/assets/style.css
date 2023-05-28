@@ -17,3 +17,9 @@ body {max-width: 1920px;margin: auto;}* {font-family: 'Inter';font-style: normal
         display: none!important;
     }
 }
+
+.active-tag{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    color:black!important;
+    font-weight: bold;
+}
