@@ -10,3 +10,5 @@
                 </div>
             </div>`)},showItemTags(a,e,l){var i='<li class="nav-item"><span class="nav-link active active-tag"  data-images-toggle="all">Tous</span></li>';t.each(l,function(t,a){i+=`<li class="nav-item active">
                 <span class="nav-link"  data-images-toggle="${a}">${a}</span></li>`});var s=`<ul class="my-4 tags-bar nav nav-pills">${i}</ul>`;"bottom"===e?a.append(s):"top"===e?a.prepend(s):console.error(`Unknown tags position: ${e}`)},filterByTag(){if(!t(this).hasClass("active-tag")){t(".active-tag").removeClass("active active-tag"),t(this).addClass("active active-tag");var a=t(this).data("images-toggle");t(".gallery-item").each(function(){t(this).parents(".item-column").hide(),"all"===a?t(this).parents(".item-column").show(300):t(this).data("gallery-tag")===a&&t(this).parents(".item-column").show(300)})}}}}(jQuery);
+
+
